@@ -1,0 +1,7 @@
+,,,,
+,Base Freq,0,,=hslider 0 100
+,,,,=osc~(E2)
+,,=signal(C2+E4),,=signal(10*E3)
+,,=osc~(C4),,
+,,=signal(0.2*C5),,
+,,=dac~(C6),,
