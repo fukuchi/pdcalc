@@ -35,13 +35,20 @@ rnum = 0
 			next if entry.nil?
 			if entry =~ /^=/
 				m = entry.match(/^=([^(]+)\(([^)]+)\)/)
-				funcname = m[1]
-				args = m[2].split(",")
-				args.each {|dest|
-					print pdobj(cnum, rnum, "obj", funcname)
-					destcell = address_to_index(dest)
-					@links << [[cnum, rnum], destcell]
-				}
+				if m.nil?
+					m = entry.match(/^=(.*)/)
+					print pdobj(cnum, rnum, "msg", m[1])
+				else 
+					funcname = m[1]
+					args = m[2].split(",")
+					args.each {|dexp|
+						print pdobj(cnum, rnum, "obj", funcname)
+						dexp.split('+').each {|dest|
+							destcell = address_to_index(dest)
+							@links << [[cnum, rnum], destcell]
+						}
+					}
+				end
 			else
 				print pdobj(cnum, rnum, "msg", entry)
 			end
