@@ -8,6 +8,11 @@ $cell_h = 50
 $margin_x = 20
 $margin_y = 20
 
+if ARGV.length == 0
+	puts "Usage: pdcalc.rb CSVFILE"
+	exit
+end
+
 @cells = CSV.read(ARGV[0])
 @cellsidx = {}
 @cellsidx_head = 0
